@@ -20,7 +20,7 @@ public class SkillServiceImpl implements SkillService {
 
     @Override
     public List<Skill> getSkillsByUserId(Long userId) {
-        return skillRepository.findByUser_Id(userId);
+        return skillRepository.findByUserId(userId);
     }
 
     @Override
