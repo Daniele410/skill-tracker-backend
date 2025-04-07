@@ -5,7 +5,7 @@ import com.danozzo.backend.model.Skill;
 import java.util.List;
 
 public interface SkillService {
-    Skill save(Skill skill);
+    Skill saveSkill(Skill skill);
 
     List<Skill> getSkillsByUserId(Long userId);
 
