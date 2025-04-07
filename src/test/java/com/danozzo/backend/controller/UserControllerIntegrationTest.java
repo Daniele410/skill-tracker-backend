@@ -36,7 +36,7 @@ class UserControllerIntegrationTest {
     @Test
     void createUser_shouldReturnCreatedUser() throws Exception {
         // Given
-        User user = new User(1L, "Mario", "mario@email.com", "1234567890", "mariou", Set.of("USER"));
+        User user = new User(1L, "Mario", "mario@email.com", "1234567890", "mariou", Set.of("USER"), Set.of());
         String inputJson = objectMapper.writeValueAsString(user);
 
         // When
@@ -55,7 +55,7 @@ class UserControllerIntegrationTest {
     void getUser_shouldReturnUserById() throws Exception {
         // Given
         Long id = 1L;
-        User user = new User(id, "Mario", "mario@email.com", "1234567890", "mariou", Set.of("USER"));
+        User user = new User(id, "Mario", "mario@email.com", "1234567890", "mariou", Set.of("USER"), Set.of());
 
         // When
         when(userService.getUserById(id)).thenReturn(user);
@@ -71,8 +71,8 @@ class UserControllerIntegrationTest {
     void getAllUsers_shouldReturnListOfUsers() throws Exception {
         // Given
         List<User> users = List.of(
-                new User(1L, "Mario", "mario@email.com", "1234567890", "mariou", Set.of("USER")),
-                new User(2L, "Luigi", "luigi@email.com", "0987654321", "luigiu", Set.of("ADMIN"))
+                new User(1L, "Mario", "mario@email.com", "1234567890", "mariou", Set.of("USER"), Set.of()),
+                new User(2L, "Luigi", "luigi@email.com", "0987654321", "luigiu", Set.of("ADMIN"), Set.of())
         );
 
         // When
@@ -98,4 +98,5 @@ class UserControllerIntegrationTest {
         mockMvc.perform(delete("/api/users/{id}", id))
                 .andExpect(status().isOk());
     }
+
 }

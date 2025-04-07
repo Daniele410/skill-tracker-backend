@@ -1,0 +1,12 @@
+package com.danozzo.backend.repository;
+
+import com.danozzo.backend.model.Skill;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface SkillRepository extends JpaRepository<Skill, Long> {
+    List<Skill> findByUser_Id(Long id);
+}

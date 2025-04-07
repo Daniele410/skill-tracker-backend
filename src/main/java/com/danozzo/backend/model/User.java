@@ -35,4 +35,7 @@ public class User {
     @Column(name = "role")
     private Set<String> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Skill> skills = new HashSet<>();
+
 }

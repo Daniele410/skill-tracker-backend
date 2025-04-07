@@ -30,7 +30,7 @@ class UserServiceImplTest {
     @Test
     void saveUser_shouldReturnSavedUser() {
         // Given
-        User user = new User(1L, "username", "mail@test.com", "pass", "Mario", Set.of("USER"));
+        User user = new User(1L, "username", "mail@test.com", "pass", "Mario", Set.of("USER"), Set.of());
         when(userRepository.save(user)).thenReturn(user);
 
         // When
@@ -44,7 +44,7 @@ class UserServiceImplTest {
     @Test
     void getUserById_shouldReturnUserById() {
         // Given
-        User user = new User(1L, "user", "email@test.com", "pass", "Mario", Set.of("USER"));
+        User user = new User(1L, "user", "email@test.com", "pass", "Mario", Set.of("USER"), Set.of());
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
         // When
@@ -58,8 +58,8 @@ class UserServiceImplTest {
     @Test
     void getAllUsers_shouldReturnListOfUsers() {
         // Given
-        User user = new User(1L, "user", "email@test.com", "pass", "Mario", Set.of("USER"));
-        User user2 = new User(2L, "user2", "email@test.com", "pass", "Mario", Set.of("USER"));
+        User user = new User(1L, "user", "email@test.com", "pass", "Mario", Set.of("USER"), Set.of());
+        User user2 = new User(2L, "user2", "email@test.com", "pass", "Mario", Set.of("USER"), Set.of());
         when(userRepository.findAll()).thenReturn(List.of(user, user2));
 
         // When
