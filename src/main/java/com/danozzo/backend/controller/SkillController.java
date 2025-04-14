@@ -2,6 +2,7 @@ package com.danozzo.backend.controller;
 
 import com.danozzo.backend.model.Skill;
 import com.danozzo.backend.service.SkillService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class SkillController {
     private final SkillService skillService;
 
     @PostMapping
-    public Skill createSkill(@RequestBody Skill skill) {
+    public Skill createSkill(@Valid @RequestBody Skill skill) {
         return skillService.saveSkill(skill);
     }
 

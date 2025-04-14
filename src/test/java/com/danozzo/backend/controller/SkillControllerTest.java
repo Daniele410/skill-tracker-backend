@@ -80,6 +80,24 @@ class SkillControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    void createSkill_withBlankFields_shouldReturn400() throws Exception {
+        //Given
+        Skill invalidSkill = Skill.builder()
+                .id(null)
+                .name("")    // blank
+                .level("")   // blank
+                .build();
+
+        //When //Then
+        mockMvc.perform(post("/api/skills")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(invalidSkill)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.name").value("Skill name is mandatory"))
+                .andExpect(jsonPath("$.level").value("Skill level is mandatory"));
+    }
+
 
     private Skill getMockSkill() {
         return Skill.builder()
