@@ -1,6 +1,7 @@
 package com.danozzo.backend.controller;
 
 import com.danozzo.backend.model.Skill;
+import com.danozzo.backend.model.SkillCategory;
 import com.danozzo.backend.service.SkillService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -87,6 +88,7 @@ class SkillControllerTest {
                 .id(null)
                 .name("")    // blank
                 .level("")   // blank
+                .category(null) // null
                 .build();
 
         //When //Then
@@ -95,7 +97,9 @@ class SkillControllerTest {
                         .content(objectMapper.writeValueAsString(invalidSkill)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.name").value("Skill name is mandatory"))
-                .andExpect(jsonPath("$.level").value("Skill level is mandatory"));
+                .andExpect(jsonPath("$.level").value("Skill level is mandatory"))
+                .andExpect(jsonPath("$.category").value("Category is required"));
+
     }
 
 
@@ -104,6 +108,7 @@ class SkillControllerTest {
                 .id(1L)
                 .name("Java")
                 .level("ADVANCED")
+                .category(SkillCategory.builder().id(1L).name("Backend").build())
                 .build();
     }
 }

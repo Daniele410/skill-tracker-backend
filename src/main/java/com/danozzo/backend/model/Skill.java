@@ -2,6 +2,7 @@ package com.danozzo.backend.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -26,4 +27,9 @@ public class Skill {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @NotNull(message = "Category is required")
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private SkillCategory category;
 }

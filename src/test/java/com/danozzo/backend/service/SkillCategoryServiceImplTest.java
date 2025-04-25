@@ -74,6 +74,21 @@ class SkillCategoryServiceImplTest {
 
     }
 
+    @Test
+    void categoryNotFound_shouldThrowException() {
+        // Given
+        Long id = 1L;
+        when(repository.existsById(id)).thenReturn(false);
+
+        // When & Then
+        try {
+            service.deleteCategory(id);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Category with id " + id + " does not exist.", e.getMessage());
+        }
+        verify(repository).existsById(id);
+    }
+
     private SkillCategory getMockCategory() {
         return SkillCategory.builder()
                 .id(1L)

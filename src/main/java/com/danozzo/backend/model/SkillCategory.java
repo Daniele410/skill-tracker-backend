@@ -1,8 +1,12 @@
 package com.danozzo.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "skill_categories")
@@ -20,8 +24,8 @@ public class SkillCategory {
     @NotBlank
     private String name;
 
-/*    @OneToMany(mappedBy= "category")
+    @OneToMany(mappedBy= "category")
     @JsonIgnore
-    private Set<Skill> skills= new HashSet<>();*/
+    private Set<Skill> skills= new HashSet<>();
 
 }
