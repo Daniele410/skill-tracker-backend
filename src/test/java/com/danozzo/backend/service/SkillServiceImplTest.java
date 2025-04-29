@@ -1,6 +1,7 @@
 package com.danozzo.backend.service;
 
 import com.danozzo.backend.model.Skill;
+import com.danozzo.backend.model.SkillCategory;
 import com.danozzo.backend.repository.SkillRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -72,6 +73,10 @@ class SkillServiceImplTest {
                 .id(1L)
                 .name("Java")
                 .level("ADVANCED")
+                .category(SkillCategory.builder()
+                        .id(1L)
+                        .name("Backend")
+                        .build())
                 .build();
     }
 
