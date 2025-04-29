@@ -102,6 +102,22 @@ class SkillControllerTest {
 
     }
 
+    @Test
+    void createSkill_withInvalidCategory_shouldReturn404() throws Exception {
+        // Given
+        Skill skill = getMockSkill();
+        skill.setCategory(SkillCategory.builder().id(999L).build()); // category not found
+
+        when(skillService.saveSkill(any(Skill.class)))
+                .thenThrow(new IllegalArgumentException("Category with id 999 does not exist."));
+
+        // When // Then
+        mockMvc.perform(post("/api/skills")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(skill)))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.error").value("Category with id 999 does not exist."));
+    }
 
     private Skill getMockSkill() {
         return Skill.builder()

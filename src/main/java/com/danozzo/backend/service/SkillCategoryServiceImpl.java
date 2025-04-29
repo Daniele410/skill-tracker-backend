@@ -30,4 +30,10 @@ public class SkillCategoryServiceImpl implements SkillCategoryService {
         }
         skillCategoryRepository.deleteById(id);
     }
+
+    @Override
+    public SkillCategory findCategoryById(Long id){
+        return skillCategoryRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Category with id " + id + " does not exist."));
+    }
+
 }

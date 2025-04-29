@@ -1,6 +1,7 @@
 package com.danozzo.backend.service;
 
 import com.danozzo.backend.model.Skill;
+import com.danozzo.backend.model.SkillCategory;
 import com.danozzo.backend.repository.SkillRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,12 @@ import java.util.List;
 public class SkillServiceImpl implements SkillService {
 
     private final SkillRepository skillRepository;
+    private final SkillCategoryService skillCategoryService;
 
     @Override
     public Skill saveSkill(Skill skill) {
+        SkillCategory category = skillCategoryService.findCategoryById(skill.getCategory().getId());
+        skill.setCategory(category);
         return skillRepository.save(skill);
     }
 
