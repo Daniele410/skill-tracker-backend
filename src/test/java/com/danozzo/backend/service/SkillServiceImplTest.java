@@ -19,6 +19,9 @@ class SkillServiceImplTest {
     @Mock
     private SkillRepository skillRepository;
 
+    @Mock
+    private SkillCategoryService skillCategoryService;
+
     @InjectMocks
     private SkillServiceImpl skillService;
 
@@ -31,6 +34,7 @@ class SkillServiceImplTest {
     void shouldSaveSkill() {
         // Given
         Skill skill = getMockSkill();
+        when(skillCategoryService.findCategoryById(anyLong())).thenReturn(skill.getCategory());
         when(skillRepository.save(skill)).thenReturn(skill);
 
         // When
